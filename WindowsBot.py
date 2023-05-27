@@ -12,19 +12,21 @@ import argparse
 
 class WindowsBot:
 
+    dir = ""
+    fileList = []
+    folderList = []
     
-    # a function to extract user-inserted arguments when script is executed
-    def argumentParse():
+    def __init__(self):
         parser = argparse.ArgumentParser(description="Clean up directory and sort files by types")
 
-        parser.add_argument("--path", type=str, default=".", help="**Directory to start organizing**")
+        parser.add_argument("--path", type=str, default=".", help="**Directory to start clean-up")
 
         args = parser.parse_args()
 
-        # extracting the directory given by user
-        path = args.path
+        # extract the directory given by user
+        self.dir = args.path
 
-        print(f"Cleaning up directory {path}")
+        print(f"Cleaning up dir: {self.dir}")
 
         return
 
