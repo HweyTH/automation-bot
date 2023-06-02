@@ -18,14 +18,9 @@ class WindowsBot:
     fileList = []
     folderList = []
     
-    def __init__(self):
-        parser = argparse.ArgumentParser(description="Clean up directory and sort files by types")
-
-        parser.add_argument("--path", type=str, default=".", help="**Directory to start clean-up")
-
+    def __init__(self, parser):
+        # extract arguments given by user
         args = parser.parse_args()
-
-        # extract the directory given by user
         self.dir = args.path
 
         print(f"Cleaning up dir: {self.dir}")
@@ -61,6 +56,7 @@ class WindowsBot:
             print("----------------------------")
 
             break
+
         return    
  
 
