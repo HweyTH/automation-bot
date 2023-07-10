@@ -25,7 +25,7 @@ print(f"List of documents {docs}")
 print(f"List of folders {folders}")
 
 # create variables to track list of files moved
-num = 0
+fileNum = 0
 
 newFolders = []
 
@@ -46,12 +46,23 @@ for doc in docs:
 
     # create a subfolder directory to move files into
     subDir = os.path.join(path, fileExt[1:].lower())
+
+    # check if the sub-folders already existed in the directory
     if subDir not in folders and subDir not in newFolders:
         try:
+            # if file not existed, create the appropriate sub-folders
             os.mkdir(subDir)
             newFolders.append(subDir)
             print(f"A subfolder {subDir} has been created")
         except FileExistsError as error:
             print(f"A relevant subfolder already existed in the directory {error}")
 
-# create subfolders according to file type(s)
+    # create a new directory for the moving file(s)
+    newPath = os.path.join(subDir, fileName) + fileExt
+    # os.path.rename(doc, newPath)
+    fileNum += 1
+    
+    print(f"Moved file {doc} to {newPath}")
+
+print(f"Finished moving {fileNum} files into {len(newFolders)} folders")
+
