@@ -24,8 +24,34 @@ print(f"List of documents {docs}")
 
 print(f"List of folders {folders}")
 
+# create variables to track list of files moved
+num = 0
 
+newFolders = []
 
+# looping through every files in the given directory
+# default: script directory
+for doc in docs:
+    fullDir, fileExt = os.path.splitext(doc)
+    fileDir = os.path.dirname(fullDir)
+    fileName = os.path.basename(fullDir)
 
+    if fileName == "script" or fileName.startswith('.'):
+        continue
 
-     
+    print(fullDir)
+    print(fileExt)
+    print(fileDir)
+    print(fileName)
+
+    # create a subfolder directory to move files into
+    subDir = os.path.join(path, fileExt[1:].lower())
+    if subDir not in folders and subDir not in newFolders:
+        try:
+            os.mkdir(subDir)
+            newFolders.append(subDir)
+            print(f"A subfolder {subDir} has been created")
+        except FileExistsError as error:
+            print(f"A relevant subfolder already existed in the directory {error}")
+
+# create subfolders according to file type(s)
